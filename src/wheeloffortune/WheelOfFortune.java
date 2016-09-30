@@ -63,7 +63,16 @@ public class WheelOfFortune {
   private static String chooseRandomWedgeValue() {
     // Choose a random index
     int randomWedgeIndex = _random.nextInt(_wedgeCount);
-
+    
+    if(_wedges.get(randomWedgeIndex) != "LOSE A TURN" && _wedges.get(randomWedgeIndex) != "BANKRUPT")
+    {
+        winning += Integer.parseInt(_wedges.get(randomWedgeIndex).replace("$", ""));
+    }
+    else if (_wedges.get(randomWedgeIndex) == "BANKRUPT")
+    {
+        winning = 0;
+    }
+    
     // Return the corresponding wedge
     return _wedges.get(randomWedgeIndex);
   }
@@ -73,20 +82,17 @@ public class WheelOfFortune {
       "1. Spin the wheel",
       "2. Buy a vowel",
       "3. Solve the puzzle",
-      "4. Quit the game",
-      "", // 5 possibly used in the future
-      "", // 6 possibly used in the future
-      "", // 7 possibly used in the future
-      "8. Toggle puzzle reveal",
-      "9. Test letter input"
+      "4. Quit the game"
+     
   );
   private static final int _quitChoiceNumber = 4;
 
   // The different puzzles to choose from
   private static final List<String> _puzzles = Arrays.asList(
-      "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
-      "PENN STATE ABINGTON",
-      "INFORMATION SCIENCES AND TECHNOLOGY"
+      "TEMPLE IS BETTER",
+      "PAY MY TUITION PLEASE",
+      "NETFLIX AND CHILL",
+      "FEEL THE BERN"
   );
 
   /*
