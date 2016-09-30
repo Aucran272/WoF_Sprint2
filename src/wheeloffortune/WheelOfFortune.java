@@ -17,6 +17,10 @@ public class WheelOfFortune {
   // To read from the keyboard
   private static final Scanner _keyboard = new Scanner(System.in);
   private static int earnings = 0;
+  private static char letter;
+  private static char letter1;
+  private static char letter2;
+  private static char solve;
 
   // Used to get random values for puzzle and wheel
   private static final Random _random = new Random();
@@ -124,6 +128,8 @@ public class WheelOfFortune {
     for (int i = 0; i < puzzle.length(); i++) {
       // Current letter
       char c = puzzle.charAt(i);
+      
+   
 
       /*
       * Either we're revealing all letters, or we've already guessed the
@@ -174,6 +180,8 @@ public class WheelOfFortune {
     char letter = ' ';
     boolean finished = false;
 
+    
+    
     while (!finished) {
       System.out.print("Enter a letter: ");
 
@@ -199,7 +207,8 @@ public class WheelOfFortune {
   private static void gameMenu() {
     // Choice from the menu
     int choice = 0;
-
+    
+    
     // Line entered from keyboard
     String line = "";
 
@@ -211,10 +220,10 @@ public class WheelOfFortune {
 
     // Repeat the menu until the user chooses to quit
     while (!quit) {
-      System.out.println("                      ======================");
-      System.out.println("                      =  Wheel Of Fortune  =");
-      System.out.println("                      ======================");
-      System.out.println("                                            ");
+      System.out.println("\n                      ======================");
+      System.out.println("\n                      =  Wheel Of Fortune  =");
+      System.out.println("\n                      ======================");
+      System.out.println("\n                                            ");
 
       System.out.println(maskPuzzle(puzzle, revealLetters));
       System.out.println();
@@ -252,12 +261,58 @@ public class WheelOfFortune {
 
         case 1: // Spin the wheel
           System.out.println("You landed on: " + chooseRandomWedgeValue());
-          char letter = inputLetter();
-          System.out.println("Your letter is: " + letter);
-          guessedLetters.put(letter, true);
+          letter1 = inputLetter();
+          
+          //Denies normal input of Vowels
+          if(letter=='a' || letter=='A' || letter=='e' || letter=='E' ||
+             letter=='i' || letter=='I' || letter=='o' || letter=='O' ||
+             letter=='u' || letter=='U')
+          {
+              System.out.println("You've selected a vowel");
+              
+          }
+          
+          else
+          {
+              System.out.print("You have selected");
+              guessedLetters.put(letter, true);
+          }
+          System.out.println("\nYour letter is: " + letter);
           break;
 
-        
+        case 2: //Buy a vowel
+            letter2 = inputLetter();
+            
+            if(letter=='a' || letter=='A' || letter=='e' || letter=='E' ||
+               letter=='i' || letter=='I' || letter=='o' || letter=='O' ||
+               letter=='u' || letter=='U')
+               
+            {
+                if(earnings >= 250) // only lets the player buy a vowel if the have $250 or more
+                {
+                    //Deducts $250 from eaarnings whenever a vowel is purchsed
+                    earnings = earnings - 250;
+                    System.out.print("\nYou bought:" + letter);
+                    
+                }
+                guessedLetters.put(letter, true);
+            }
+            
+            else
+            {
+                System.out.print("\nYou can only buy vowels.");
+            }
+                    
+            break;
+            
+        /*case 3: // Solve the puzzle
+            boolean notSolved = true;
+            while (notSolved){
+                notSolved = false; // for the break statement when the user wins
+                
+                }
+            }
+           */ 
 
         
       }
