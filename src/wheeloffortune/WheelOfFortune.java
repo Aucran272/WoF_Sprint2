@@ -16,6 +16,7 @@ public class WheelOfFortune {
 
   // To read from the keyboard
   private static final Scanner _keyboard = new Scanner(System.in);
+  private static int earnings = 0;
 
   // Used to get random values for puzzle and wheel
   private static final Random _random = new Random();
@@ -66,11 +67,11 @@ public class WheelOfFortune {
     
     if(_wedges.get(randomWedgeIndex) != "LOSE A TURN" && _wedges.get(randomWedgeIndex) != "BANKRUPT")
     {
-        winning += Integer.parseInt(_wedges.get(randomWedgeIndex).replace("$", ""));
+        earnings += Integer.parseInt(_wedges.get(randomWedgeIndex).replace("$", ""));
     }
     else if (_wedges.get(randomWedgeIndex) == "BANKRUPT")
     {
-        winning = 0;
+        earnings = 0;
     }
     
     // Return the corresponding wedge
@@ -217,7 +218,7 @@ public class WheelOfFortune {
 
       System.out.println(maskPuzzle(puzzle, revealLetters));
       System.out.println();
-
+      System.out.println("So far you've won: $" + earnings);
       // Loop over the menu choices, and display each one
       for (String menuChoice : _menuChoices) {
         // Skip blank place-holder choices
@@ -256,13 +257,9 @@ public class WheelOfFortune {
           guessedLetters.put(letter, true);
           break;
 
-        case 8: // Toggle reveal letters
-          revealLetters = !revealLetters;
-          break;
+        
 
-        case 9: // Test to read in a letter from the keyboard
-          System.out.println("Your letter is: " + inputLetter());
-          break;
+        
       }
     }
   }
